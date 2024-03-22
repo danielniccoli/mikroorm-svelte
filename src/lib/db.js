@@ -1,18 +1,5 @@
-import { MikroORM, EntitySchema } from "@mikro-orm/core"
-import { PostgreSqlDriver } from "@mikro-orm/postgresql"
+import { MikroORM } from "@mikro-orm/postgresql"
+import config from '../mikro-orm.config.js';
 
-const Book = new EntitySchema({
-    name: "Book",
-    properties: {
-        id: { type: Number, primary: true },
-        title: { type: String },
-    },
-})
-
-export const orm = MikroORM.initSync({
-    entities: [Book],
-    dbName: "mikroorm_svelte",
-    driver: PostgreSqlDriver,
-    user: "postgres",
-    password: "postgres"
-})
+export const orm = MikroORM.initSync(config);
+export const em = orm.em;
